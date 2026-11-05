@@ -863,7 +863,91 @@ Tempo restante. Perguntas prováveis e respostas curtas:
 | ADR | Registro de decisão de arquitetura; cada escolha relevante tem o seu nos repositórios |
 | Toolchain | Conjunto de compilador e ferramentas que gera um programa; define em quais sistemas ele roda |
 
-## Apêndice B. Fontes
+## Apêndice B. Termos técnicos explicados para quem não é da área
+Explicações em linguagem comum, agrupadas por tema, para acompanhar a apresentação sem formação técnica. O
+Apêndice A traz as definições curtas de referência.
+
+### Vídeo e câmeras
+
+**Câmera IP e fluxo de vídeo.** A câmera de rodovia é um pequeno computador ligado à rede que transmite vídeo continuamente. Esse vídeo em trânsito é o fluxo (stream); quem quiser assistir pede o fluxo à câmera, como se sintonizasse um canal.
+
+**RTSP.** O idioma que câmeras e servidores de vídeo usam para pedir e entregar um fluxo ao vivo. É o padrão da indústria de câmeras; o cliente desktop fala RTSP com o servidor.
+
+**WebRTC.** A tecnologia de vídeo em tempo real que já vem dentro dos navegadores, a mesma das chamadas de vídeo. Permite assistir sem instalar nada; é o que a tela "Ao vivo" usa.
+
+**Codec.** O método de compactar o vídeo para que caiba na rede e descompactá-lo para exibir, como um arquivo zip para imagens em movimento. Sem compactação, uma só câmera encheria a rede.
+
+**H.264 e H.265.** Os dois codecs usados pelas câmeras. H.264 é o mais comum e todo navegador o reproduz. H.265 é mais novo e compacta cerca de duas vezes melhor, mas os navegadores não o reproduzem pelo WebRTC; algumas câmeras só oferecem esse formato, e por isso só são assistíveis no cliente desktop.
+
+**Decodificação por hardware.** Descompactar o vídeo num circuito dedicado da placa gráfica, em vez de usar o processador principal. É como ter um funcionário especializado só para isso: a estação exibe 16 câmeras com folga em vez de travar.
+
+**GPU.** A placa gráfica da estação. Além de desenhar a tela, descompacta vídeo; "vídeo direto na GPU" significa que a imagem vai para a tela sem passar de novo pela memória do programa.
+
+**Perfis MAIN e SUB.** A mesma câmera pode oferecer duas versões do vídeo: a completa, em alta resolução (MAIN), e uma leve (SUB). No mosaico de muitas câmeras usa-se a leve; ao ampliar uma câmera, a completa.
+
+**Mosaico.** A grade de células da tela do operador, cada uma com uma câmera ao vivo: 2×2, 4×2, 4×4. Cada célula é um fluxo que chega à estação.
+
+**Latência.** O atraso entre o que acontece na rodovia e o que aparece na tela. Abaixo de meio segundo é praticamente tempo real.
+
+**Transcodificação.** Converter o vídeo de um formato para outro no servidor. Custa um processo por câmera; para 4.600 câmeras seria inviável, por isso o CFTV não transcodifica: repassa o vídeo como vem da câmera.
+
+**VMS.** Sistema de gerenciamento de vídeo: o software comercial de monitoramento, como Digifort e SecurOS. Alguns cobram licença por câmera; o CFTV substitui essa função sem licença.
+
+**MediaMTX.** O servidor de vídeo do CFTV, de código aberto. Recebe o fluxo da câmera uma única vez e o repassa a quem tiver autorização, como uma central telefônica que liga vários ramais a uma mesma linha.
+
+### Rede e acesso
+
+**Porta.** Uma "porta de entrada" numérica num servidor; cada serviço atende numa porta. Abrir uma porta no firewall é permitir que alguém de fora bata nela. O agente de borda usa uma só, e só a ARTESP bate.
+
+**Firewall.** O porteiro da rede: decide quais conexões entram e saem. Cada regra nova é uma exceção que a equipe de rede precisa manter.
+
+**Borda (edge).** Um servidor da concessionária, dentro da rede dela, onde roda o agente do CFTV. Serve de ponte: a central puxa o vídeo da borda, e a borda puxa das câmeras que a ARTESP não alcança diretamente.
+
+**Active Directory e LDAPS.** O cadastro corporativo de usuários e senhas da ARTESP (Active Directory) e o canal protegido pelo qual o CFTV consulta esse cadastro (LDAPS). O operador entra com a mesma senha da rede.
+
+**Sessão e token.** Depois do login, o sistema entrega ao programa do operador um crachá temporário (token) que vale por algumas horas; cada pedido seguinte mostra o crachá em vez da senha.
+
+**Código por e-mail.** A forma de entrada das concessionárias: em vez de senha, um código de seis dígitos enviado ao e-mail, válido por dez minutos. Nenhuma senha para vazar.
+
+**Chave de integração.** Um crachá de longa duração para que outro sistema (não uma pessoa) leia o catálogo e o vídeo. É pedida com justificativa, aprovada por outro gestor e exibida uma única vez.
+
+**Chave de publicação.** Um crachá público que abre só a seleção de câmeras de um mapa, sempre na versão leve do vídeo. Pode ser trocada ou cancelada a qualquer momento pelo dono ou pela GEINFRA.
+
+**Ticket.** Um crachá de poucos segundos de validade que o servidor emite para cada espectador público; expira sozinho.
+
+**HTTPS e TLS.** O cadeado do navegador: o conteúdo viaja cifrado entre a estação e o servidor. TLS é o mecanismo por trás do cadeado; RTSPS é o RTSP com esse mesmo cadeado.
+
+**Relay de e-mail.** O servidor da ARTESP que entrega os e-mails que o CFTV envia (códigos de acesso, avisos de chamados).
+
+### Servidor, dados e operação
+
+**VM.** Um servidor virtual: uma máquina que existe dentro de outra, provida pela infraestrutura da ARTESP. Para quem usa, comporta-se como um servidor comum.
+
+**Contêiner e Docker.** Caixas isoladas dentro da VM, uma para cada serviço (banco, API, vídeo, painéis), com tudo de que cada um precisa. Docker é a ferramenta que monta e executa essas caixas.
+
+**Ansible e release imutável.** Ansible repete a instalação do servidor sempre do mesmo jeito, a partir de um roteiro escrito. Uma release imutável é uma versão que, uma vez montada, não muda: se algo falhar, volta-se à anterior em minutos.
+
+**API.** A "porta de serviço" por onde programas conversam com o sistema: o cliente desktop, o portal, os mapas e os integradores pedem dados à API de catálogo em vez de acessar o banco diretamente.
+
+**Contrato OpenAPI.** A descrição formal de tudo o que a API aceita e devolve. Cliente e portal são gerados a partir dela, então nunca divergem do servidor.
+
+**Banco de dados e PostgreSQL.** Onde o catálogo, os usuários, a auditoria e as métricas ficam guardados. PostgreSQL é o banco de código aberto usado.
+
+**Revisão e feed de mudanças.** Cada alteração de câmera recebe um número crescente (revisão). Quem sincroniza pede "o que mudou desde a revisão N" e recebe só a diferença, em vez de baixar tudo.
+
+**GeoJSON.** O formato padrão de camadas de mapa; o ArcGIS e o QGIS leem direto. O CFTV entrega as câmeras nesse formato para os mapas.
+
+**Prometheus, Loki e Grafana.** Prometheus guarda números ao longo do tempo (uso de processador, quantos assistem); Loki guarda os registros que os serviços escrevem; Grafana desenha os dois em painéis que a gestão consulta pelo portal.
+
+**Teste de saúde.** O sistema "bate na porta" de cada câmera de tempos em tempos, sem puxar vídeo, para saber se ela responde e se a senha ainda vale.
+
+**Binário único e toolchain.** Um só arquivo executável que contém tudo de que precisa, sem instalação no servidor da concessionária. Toolchain é o conjunto de compilador e ferramentas que gera esse arquivo e define em quais sistemas ele roda.
+
+**Código aberto.** Software cujo código-fonte é público e pode ser usado sem licença paga. Tudo o que o CFTV usa é de código aberto, e o CFTV em si é software próprio da ARTESP.
+
+**ADR.** Registro de decisão de arquitetura: um documento curto que diz o que foi decidido, por quê e o que foi descartado. Cada escolha relevante do CFTV tem o seu.
+
+## Apêndice C. Fontes
 
 - `README.md` do repositório guarda-chuva e `deploy/README.md`.
 - Memória do projeto em `.agents/memory/` (arquitetura, funcionalidades, bordas).

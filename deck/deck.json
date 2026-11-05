@@ -22,6 +22,9 @@
     "operacao",
     "estado",
     "proximos",
-    "perguntas"
+    "perguntas",
+    "apendice-video",
+    "apendice-rede",
+    "apendice-servidor"
   ]
 }
