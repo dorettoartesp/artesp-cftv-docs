@@ -1,0 +1,6 @@
+site/index.html
+output/
+__pycache__/
+.superpowers/
+.DS_Store
+*.local

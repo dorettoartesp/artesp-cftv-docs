@@ -1,0 +1,78 @@
+/* CFTV ARTESP — reveal.js frame with the ARTESP identity (from the PMO deck).
+   Each slide carries its own inline styles; this file only sets what the slide
+   format assumes as default and what reveal.js must stop imposing. */
+
+html, body { background: #141414; }
+
+.reveal { font-family: 'Inter', Arial, sans-serif; color: #141414; }
+.reveal .slides { text-align: left; }
+.reveal .slides > section,
+.reveal .slides > section > section { padding: 0; top: 0; }
+
+/* O slide: lona fixa de 1920×1080, como no formato de origem. */
+.sl {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate; /* permite z-index:-1 no fundo decorativo sem sumir atrás do slide */
+}
+.sl * { box-sizing: border-box; }
+
+/* Padrões tipográficos do formato de origem. */
+.sl h1, .sl h2, .sl h3, .sl p, .sl ul, .sl ol, .sl li { margin: 0; }
+.sl h1 { font-size: 96px; font-weight: 600; line-height: 1.1; }
+.sl h2 { font-size: 64px; font-weight: 600; line-height: 1.15; }
+.sl h3 { font-size: 44px; font-weight: 600; line-height: 1.2; }
+.sl p  { font-size: 32px; font-weight: 400; line-height: 1.4; }
+.sl h1, .sl h2, .sl h3 { text-transform: none; letter-spacing: normal; }
+.sl ul, .sl ol { padding-left: 1.1em; }
+.sl li { margin: 0.2em 0; line-height: inherit; }
+.sl b { font-weight: 700; }
+
+/* Tabelas: células com régua e espaçamento do formato de origem. */
+.sl table { border-collapse: collapse; width: 100%; }
+.sl th, .sl td { padding: 0.35em 0.6em; border-bottom: 1px solid #E2E2E2; vertical-align: top; }
+.sl th { font-weight: 600; }
+.sl tr:last-child td { border-bottom: none; }
+
+/* Imagens e ícones sem as margens e bordas que o reveal.js acrescenta. */
+.reveal .sl img { margin: 0; border: 0; box-shadow: none; max-width: none; max-height: none; }
+.sl svg.ic { display: block; }
+
+/* Moldura do reveal.js em vermelho ARTESP. */
+.reveal .controls { color: #E41C2E; }
+.reveal .progress { height: 4px; color: #E41C2E; }
+.reveal .slide-number { background: transparent; color: #8A8A8A; font-family: 'Inter', Arial, sans-serif; font-size: 14px; right: auto; left: 16px; bottom: 8px; }
+
+/* Ajuda de navegação: botão "?" ao lado do contador e caixa em português. */
+.ajuda-btn {
+  position: fixed; left: 88px; bottom: 10px; z-index: 32;
+  width: 18px; height: 18px; padding: 0; border-radius: 50%;
+  border: 1px solid #B0B0B0; background: transparent; color: #8A8A8A;
+  font: 600 11px/16px 'Inter', Arial, sans-serif; cursor: pointer;
+}
+.ajuda-btn:hover, .ajuda-btn[aria-expanded="true"] { border-color: #E41C2E; color: #E41C2E; }
+.ajuda {
+  position: fixed; left: 16px; bottom: 40px; z-index: 33; width: 340px;
+  background: #FFFFFF; color: #141414; border: 1px solid #E2E2E2; border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25); padding: 16px 18px;
+  font: 400 14px/1.5 'Inter', Arial, sans-serif;
+}
+.ajuda[hidden] { display: none; }
+.ajuda h2 { margin: 0 0 10px; font: 700 15px/1.3 'Montserrat', Arial, sans-serif; color: #E41C2E; }
+.ajuda table { border-collapse: collapse; width: 100%; }
+.ajuda td { padding: 3px 0; vertical-align: top; }
+.ajuda td:first-child { width: 128px; white-space: nowrap; }
+.ajuda kbd {
+  display: inline-block; min-width: 22px; padding: 0 6px; margin-right: 2px; text-align: center;
+  border: 1px solid #C8C8C8; border-bottom-width: 2px; border-radius: 5px; background: #F4F4F4;
+  font: 600 12px/20px 'Inter', Arial, sans-serif; color: #141414;
+}
+.ajuda p { margin: 10px 0 0; color: #6E6E6E; font-size: 13px; }
+
+/* Impressão em PDF (?print-pdf): uma página por slide, sem moldura. */
+@media print {
+  .reveal .controls, .reveal .progress, .reveal .slide-number, .ajuda-btn, .ajuda { display: none !important; }
+}

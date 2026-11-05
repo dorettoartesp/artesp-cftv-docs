@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} — ARTESP</title>
+<meta name="description" content="Apresentação do sistema CFTV da ARTESP para a gestão de TI: catálogo, vídeo ao vivo, concessionárias, chamados, publicação em mapas, bordas, segurança e operação.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/logo-positivo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="vendor/reveal/reveal.css">
+<link rel="stylesheet" href="css/artesp.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+{{SLIDES}}
+</div>
+</div>
+<button class="ajuda-btn" type="button" aria-label="Ajuda de navegação" aria-expanded="false" aria-controls="ajuda">?</button>
+<div class="ajuda" id="ajuda" role="dialog" aria-label="Como navegar" hidden>
+<h2>Como navegar</h2>
+<table>
+<tr><td><kbd>→</kbd> <kbd>←</kbd> <kbd>Espaço</kbd></td><td>avançar e voltar</td></tr>
+<tr><td><kbd>G</kbd> número <kbd>Enter</kbd></td><td>ir ao slide (o número aparece no canto inferior esquerdo)</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>visão geral de todos os slides; clique em um para abrir</td></tr>
+<tr><td><kbd>F</kbd></td><td>tela cheia (<kbd>Esc</kbd> sai)</td></tr>
+<tr><td><kbd>B</kbd></td><td>escurecer a tela durante uma pausa</td></tr>
+<tr><td><kbd>?</kbd></td><td>abre e fecha esta ajuda</td></tr>
+</table>
+<p>Também é possível clicar nas setas no canto inferior direito.</p>
+</div>
+<script src="vendor/reveal/reveal.js"></script>
+<script>
+Reveal.initialize({
+  width: 1920, height: 1080, margin: 0, minScale: 0.1, maxScale: 1.5,
+  center: false, hash: true, controls: true, controlsTutorial: false, help: false,
+  progress: true, slideNumber: 'c/t', transition: 'fade', transitionSpeed: 'fast',
+  backgroundTransition: 'none', pdfMaxPagesPerSlide: 1, pdfSeparateFragments: false
+});
+(function () {
+  var btn = document.querySelector('.ajuda-btn');
+  var box = document.getElementById('ajuda');
+  function abrir(sim) { box.hidden = !sim; btn.setAttribute('aria-expanded', sim ? 'true' : 'false'); }
+  btn.addEventListener('click', function () { abrir(box.hidden); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '?') { e.preventDefault(); e.stopPropagation(); abrir(box.hidden); }
+    else if (e.key === 'Escape' && !box.hidden) { e.preventDefault(); e.stopPropagation(); abrir(false); }
+  }, true);
+})();
+</script>
+</body>
+</html>
