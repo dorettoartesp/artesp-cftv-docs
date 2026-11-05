@@ -200,6 +200,32 @@ flowchart TB
     DB --> BKP
 ```
 
+### 3.3 Por que estas tecnologias
+
+**Mensagem-chave:** cada componente usa a tecnologia que resolve a sua restrição concreta; todas são de código
+aberto, sem licença por câmera, por estação ou por operador, e cada escolha está registrada numa decisão de
+arquitetura (ADR) no repositório do componente.
+
+| Componente | Tecnologia | Por quê | Alternativas descartadas |
+|---|---|---|---|
+| API de catálogo | Python 3.13, Django 6.1, PostgreSQL 17 | Django traz pronto o painel de cadastro e a importação de planilhas; ecossistema maduro para API REST com contrato OpenAPI; PostgreSQL dá sequências e travas que garantem a ordem das revisões do catálogo | Cadastro em planilhas ou em VMS comercial: sem revisão, sem auditoria, sem API |
+| Portal web | React 19, TypeScript, Vite, Tailwind | Aplicação estática servida pelo Caddy ao lado da API, sem instalação nas estações; cliente HTTP gerado do contrato OpenAPI, então tela e API não divergem | Portal dentro do Django Admin: sem mapa, sem mosaico ao vivo |
+| Cliente desktop | C#, .NET 10, Avalonia, LibVLC | Um só código para Windows (produção) e Linux (desenvolvimento); LibVLC decodifica por hardware e reproduz H.264 e H.265; o motor de vídeo fica atrás de uma interface, com GStreamer como plano B | WPF ou WinUI: só Windows. FFmpeg direto: renderização, sincronismo e buffer a escrever do zero |
+| Agente de borda | Go 1.20, binário único com MediaMTX embutido | O único toolchain que gera um só executável para Windows Server 2012 e Linux, o parque real dos centros de controle; mesmo toolchain do MediaMTX 1.2.0, embutido no agente | Python e .NET atuais não rodam no Windows Server 2012 |
+| Servidor de vídeo | MediaMTX 1.2.0 (Go, código aberto) | RTSP e WebRTC prontos, autorização de cada leitura por chamada externa à API, sem transcodificação; versão fixada pela compatibilidade com Windows Server 2012 nas bordas | Transcodificar para o navegador: um processo por câmera, inviável para 4.600 |
+| Implantação | Docker, Ansible, Caddy | Padrão já adotado no escritório de projetos da ARTESP: releases imutáveis, retorno à versão anterior em minutos, HTTPS e proxy num só serviço | Instalação manual na VM: irreprodutível |
+| Observabilidade e tarefas | Prometheus, Loki, Grafana, Redis e Celery | Padrão de mercado, código aberto, sem licença; Grafana atrás do próprio portal; Celery executa as tarefas periódicas (coleta das bordas, saúde, e-mail) | Monitoramento comercial: licença e mais um login |
+
+**Fala sugerida**
+
+- A pergunta a fazer a cada tecnologia foi "qual restrição concreta ela resolve", não "qual é a mais moderna":
+  o Windows Server 2012 das bordas fixou Go 1.20 e MediaMTX 1.2.0; a estação do operador fixou .NET com LibVLC; o
+  cadastro com importação e auditoria fixou Django.
+- Repositórios separados por componente, unidos por um repositório guarda-chuva que fixa a combinação liberada; o
+  contrato OpenAPI versionado é a fronteira entre cliente, portal e API.
+- Risco assumido e registrado: Go 1.20 e MediaMTX 1.2.0 não recebem mais correções de segurança; a atualização depende
+  de as bordas saírem do Windows Server 2012 e exige nova decisão de arquitetura.
+
 ---
 
 ## 4. Como o vídeo chega ao operador
@@ -835,6 +861,7 @@ Tempo restante. Perguntas prováveis e respostas curtas:
 | ETag | Marca de versão de uma resposta; o consumidor baixa de novo só quando mudou |
 | Ansible Vault | Arquivo cifrado com os segredos de implantação de cada ambiente |
 | ADR | Registro de decisão de arquitetura; cada escolha relevante tem o seu nos repositórios |
+| Toolchain | Conjunto de compilador e ferramentas que gera um programa; define em quais sistemas ele roda |
 
 ## Apêndice B. Fontes
 
