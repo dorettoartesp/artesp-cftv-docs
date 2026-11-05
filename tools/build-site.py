@@ -90,10 +90,78 @@ def check_balance(sid, html):
                          % (sid, p.stack, p.errors))
 
 
-def convert(sid, html):
+def _clean_label(text):
+    """Strip Mermaid shape markers: ((root)), (rounded), [square]."""
+    text = text.strip()
+    m = re.match(r"^[\w-]*(?:\(\((.*)\)\)|\((.*)\)|\[(.*)\])$", text)
+    if m:
+        return next(g for g in m.groups() if g is not None).strip()
+    return text
+
+
+def parse_mindmap(code):
+    """A Mermaid mind map -> (root label, [(branch, [leaves])]). Depth comes from indentation."""
+    lines = [line for line in code.split("\n") if line.strip()]
+    if not lines or lines[0].strip() != "mindmap":
+        raise SystemExit("x-groups: o bloco não é um mindmap")
+    root, groups = None, []
+    indents = []
+    for line in lines[1:]:
+        indent = len(line) - len(line.lstrip(" "))
+        label = _clean_label(line)
+        if root is None:
+            root, indents = label, [indent]
+            continue
+        if indent not in indents:
+            indents.append(indent)
+            indents.sort()
+        depth = indents.index(indent)
+        if depth == 1:
+            groups.append((label, []))
+        elif depth >= 2 and groups:
+            groups[-1][1].append(label)
+    return root, groups
+
+
+def groups_html(groups, style):
+    """Columns of cards, one per branch, with its leaves as a list."""
+    cols = len(groups) if len(groups) <= 4 else 3
+    cards = []
+    for title, leaves in groups:
+        items = "".join("<li>%s</li>" % leaf for leaf in leaves)
+        cards.append(
+            '<div class="grupo" style="background:#FFFFFF;border:1px solid #E2E2E2;border-top:6px solid #E41C2E;'
+            'border-radius:12px;padding:22px 26px;display:flex;flex-direction:column;gap:12px">'
+            '<h3 style="font-family:\'Montserrat\', Arial, sans-serif;font-size:28px;font-weight:700">%s</h3>'
+            '<ul style="font-size:23px;line-height:1.35;color:#3C3C3C;padding-left:1.1em;margin:0">%s</ul></div>'
+            % (title, items))
+    return ('<div class="grupos" style="%s;display:grid;grid-template-columns:repeat(%d, 1fr);gap:24px;'
+            'align-content:center">%s</div>' % (style, cols, "".join(cards)))
+
+
+def _script_blocks(script):
+    """{name: code} for the marked ```mermaid fences of the script (same contract as render-diagrams.py)."""
+    out = {}
+    for m in re.finditer(r"<!--\s*diagrama:\s*(\S+)\s*-->\n```mermaid\n(.*?)```", script, re.S):
+        out[m.group(1)] = m.group(2)
+    return out
+
+
+def groups(tag, script):
+    name = attr(tag, "src", "")
+    style = attr(tag, "style", "")
+    blocks = _script_blocks(script or "")
+    if name not in blocks:
+        raise SystemExit("x-groups: não há diagrama %r no roteiro" % name)
+    _root, parsed = parse_mindmap(blocks[name])
+    return groups_html(parsed, style)
+
+
+def convert(sid, html, script=""):
     """One slide file -> one reveal.js <section> wrapping the 1920×1080 canvas div."""
     html = re.sub(r'<!--.*?-->', '', html, flags=re.S)
     html = re.sub(r'<x-icon\b[^>]*>\s*</x-icon>', lambda m: icon(m.group(0)), html)
+    html = re.sub(r'<x-groups\b[^>]*>\s*</x-groups>', lambda m: groups(m.group(0), script), html)
     html = html.replace('<svg style="position:absolute;left:0;top:0" width="1920" height="1080"',
                         '<svg class="bg" aria-hidden="true" style="position:absolute;left:0;top:0;z-index:-1" width="1920" height="1080"')
     m = re.match(r'\s*<section\b([^>]*)>(.*)</section>\s*$', html, flags=re.S)
@@ -112,6 +180,8 @@ def convert(sid, html):
 def build(deck_dir: Path, out: Path) -> int:
     deck = json.loads((deck_dir / "deck.json").read_text(encoding="utf-8"))
     title = deck.get("title", "Apresentação")
+    script_file = deck_dir.resolve().parent / "APRESENTACAO.md"
+    script = script_file.read_text(encoding="utf-8") if script_file.is_file() else ""
     slides = []
     for sid in deck["order"]:
         f = deck_dir / "slides" / ("%s.html" % sid)
@@ -119,7 +189,7 @@ def build(deck_dir: Path, out: Path) -> int:
             raise SystemExit("slide %s: arquivo %s não existe" % (sid, f))
         src = f.read_text(encoding="utf-8")
         check_balance(sid, src)
-        slides.append(convert(sid, src))
+        slides.append(convert(sid, src, script))
     tpl = (out.parent / "template.html").read_text(encoding="utf-8")
     page = tpl.replace("{{TITLE}}", title).replace("{{SLIDES}}", "".join(slides))
     out.write_text(page, encoding="utf-8")

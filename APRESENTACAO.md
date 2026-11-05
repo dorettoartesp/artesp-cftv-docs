@@ -32,7 +32,8 @@ públicos do projeto. Termos técnicos estão no glossário do apêndice.
 
 **Tempo:** 2 min.
 **Mensagem-chave:** a ARTESP fiscaliza cerca de 4.600 câmeras de rodovias concedidas, mas até aqui não tinha catálogo
-único, visão de disponibilidade nem forma segura de distribuir o vídeo.
+único, visão de disponibilidade nem forma segura de distribuir o vídeo; e assistia por vários clientes de vídeo
+distintos, um deles licenciado por câmera.
 
 **Fala sugerida**
 
@@ -42,6 +43,11 @@ públicos do projeto. Termos técnicos estão no glossário do apêndice.
   concessionária, sem controle de quem via o quê.
 - Ninguém sabia quais câmeras respondiam antes de um operador tentar abrir.
 - Alterações de cadastro e problemas com câmeras eram tratados por e-mail, sem rastreabilidade.
+- Para assistir, conviviam vários clientes de vídeo (VMS), como Digifort e SecurOS, cada um com sua tela, seu
+  cadastro e seu treinamento; o operador precisava saber em qual deles cada câmera estava.
+- O SecurOS da ARTESP cobra uma licença por câmera: licenciar as cerca de 4.600 câmeras era inviável e o custo
+  crescia a cada câmera nova, sem acrescentar função. O CFTV é software próprio e livre: nenhuma licença por
+  câmera, por estação ou por operador.
 
 <!-- diagrama: situacao -->
 ```mermaid
@@ -61,6 +67,10 @@ mindmap
     Relacionamento
       Problemas tratados por e-mail
       Sem prazo nem auditoria
+    Ferramentas de vídeo
+      Vários clientes, como Digifort e SecurOS
+      Licença por câmera no SecurOS
+      Licenciar 4.600 câmeras inviável
 ```
 
 ---
@@ -125,6 +135,14 @@ de vídeo; nas concessionárias que não expõem as câmeras, um agente de borda
 - Prometheus, Loki e Grafana formam a observabilidade, acessível pelo próprio portal.
 - Repositórios separados por componente (API, web, cliente desktop, agente de borda, contrato OpenAPI, infraestrutura),
   reunidos num repositório guarda-chuva que fixa a combinação liberada.
+
+**Em termos simples**
+
+- Uma VM é um servidor virtual: uma máquina que existe dentro de outra, alugada da infraestrutura da ARTESP.
+  Contêineres são caixas isoladas dentro dessa máquina, uma para cada serviço (banco, API, vídeo, painéis), que
+  sobem e descem juntas e não interferem umas nas outras.
+- Ansible é a ferramenta que repete a instalação sempre do mesmo jeito, a partir de um roteiro escrito. Uma release
+  imutável é uma versão que, uma vez montada, não muda: se algo falhar, volta-se à anterior em minutos.
 
 ### 3.1 Contexto
 
@@ -202,6 +220,17 @@ puxada uma só vez, por mais operadores que a assistam.
 - No navegador o transporte é WebRTC (latência abaixo de meio segundo); no desktop é RTSP. Um operador assiste em um
   lugar por vez.
 
+**Em termos simples**
+
+- RTSP é o "idioma" que câmeras e servidores de vídeo usam para pedir e entregar um fluxo ao vivo; é o que o cliente
+  desktop fala com o servidor.
+- WebRTC é a tecnologia de vídeo em tempo real que os navegadores já trazem, a mesma das chamadas de vídeo; é o que a
+  tela "Ao vivo" usa, sem instalar nada.
+- MediaMTX é o servidor de vídeo: recebe o fluxo da câmera uma única vez e o repassa a quem tiver autorização, como uma
+  central telefônica que conecta vários ramais a uma mesma linha.
+- Perfis MAIN e SUB: a mesma câmera pode oferecer a imagem completa, em alta resolução (MAIN), e uma versão leve (SUB).
+  No mosaico de muitas câmeras usa-se a leve; ao ampliar uma câmera, a completa.
+
 <!-- diagrama: video -->
 ```mermaid
 sequenceDiagram
@@ -257,10 +286,26 @@ direto na placa gráfica e não depende dos limites de um navegador.
     sem depender de atualizações automáticas do navegador, extensões ou política de GPU do navegador.
 - Por isso a tela "Ao vivo" abre com a recomendação do cliente desktop e oferece o download para Windows e Linux;
   as duas opções continuam disponíveis, e um operador assiste em um lugar por vez.
+- Custo: o cliente desktop substitui, nas estações da ARTESP, os clientes de vídeo comerciais licenciados por câmera
+  ou por estação; não há licença a comprar por câmera, por estação ou por operador, e cada câmera nova entra no
+  catálogo sem custo adicional de software.
 - Limites honestos: a medição de referência foi feita em estação de desenvolvimento Linux e é indicativa; a medição
   do navegador em estação de sala de controle com 4, 8, 9 e 16 células é item pendente da homologação. A escolha da
   tecnologia (.NET, Avalonia, LibVLC) isola o motor de vídeo atrás de uma interface, para ser trocado se a medição em
   produção exigir.
+
+**Em termos simples**
+
+- Codec é o método de compactar o vídeo para que ele caiba na rede, e de descompactá-lo para exibir. H.264 é o mais
+  comum e todo navegador o reproduz; H.265 é mais novo e compacta cerca de duas vezes melhor, mas os navegadores não o
+  reproduzem pelo WebRTC, e algumas câmeras das concessionárias só oferecem esse formato.
+- Decodificar é descompactar o vídeo. "Por hardware" quer dizer que um circuito dedicado da placa gráfica faz esse
+  trabalho, em vez do processador principal; é a diferença entre uma estação que exibe 16 câmeras com folga e uma que
+  trava.
+- GPU é a placa gráfica. "Vídeo direto na GPU" significa que a imagem descompactada vai para a tela sem passar de novo
+  pela memória do programa, o que economiza processador e memória.
+- "24% a 32% de um núcleo" significa que, numa estação com oito núcleos de processamento, oito câmeras ocupam cerca de
+  um terço de um único núcleo.
 
 <!-- diagrama: desktop -->
 ```mermaid
@@ -554,6 +599,13 @@ por uma única porta; a borda nunca inicia conexão com a rede da ARTESP.
 - Por que MediaMTX 1.2.0: última versão compilada com uma toolchain que roda em Windows Server 2012; a atualização
   depende de uma decisão de arquitetura registrada.
 
+**Em termos simples**
+
+- Um binário único é um só arquivo executável que já contém tudo de que precisa; não há instalação de dependências no
+  servidor da concessionária. Go é a linguagem que permite gerar esse arquivo para Windows e Linux.
+- "Uma só porta" é como uma única porta de entrada no prédio da concessionária, aberta só para a ARTESP bater; a
+  concessionária nunca precisa abrir uma porta na direção contrária.
+
 <!-- diagrama: bordas -->
 ```mermaid
 flowchart LR
@@ -649,6 +701,13 @@ da própria plataforma, todas no Grafana atrás do portal.
 - Grafana usa a sessão do portal: gestores administram, papel de observabilidade só lê; acesso ao banco restrito às
   tabelas de métricas.
 - Trabalho em segundo plano em Celery com registro da última execução de cada job.
+
+**Em termos simples**
+
+- Prometheus guarda números ao longo do tempo (uso de processador, memória, quantos operadores assistem); Loki guarda
+  as linhas de registro que os serviços escrevem; Grafana desenha os dois em painéis que a gestão consulta pelo portal.
+- Teste contínuo de saúde: o sistema "bate na porta" de cada câmera de tempos em tempos, sem puxar vídeo, para saber se
+  ela responde e se a senha ainda vale.
 
 <!-- diagrama: operacao -->
 ```mermaid
@@ -751,6 +810,17 @@ Tempo restante. Perguntas prováveis e respostas curtas:
 | MediaMTX | Servidor de vídeo de código aberto que puxa as câmeras sob demanda e redistribui aos espectadores |
 | LibVLC | Motor de reprodução do VLC, usado pelo cliente desktop com decodificação por hardware |
 | Perfil MAIN e SUB | Fluxo principal em alta resolução e fluxo leve da mesma câmera; mosaicos usam SUB quando existe |
+| Codec | Método de compactar e descompactar vídeo para que caiba na rede; H.264 e H.265 são os dois usados pelas câmeras |
+| H.264 e H.265 | H.264: o codec mais comum, reproduzido por todo navegador. H.265: mais novo, compacta cerca de duas vezes melhor, mas não é reproduzido pelo WebRTC do navegador |
+| Decodificação por hardware | Descompactar o vídeo num circuito dedicado da placa gráfica, em vez do processador principal; permite muitas câmeras numa estação comum |
+| GPU | Placa gráfica da estação; além de desenhar a tela, decodifica vídeo |
+| Mosaico | Grade de células, cada uma com uma câmera ao vivo (1×1, 2×2, 4×2, 3×3, 4×4) |
+| VMS | Sistema de gerenciamento de vídeo, o software comercial de monitoramento, como Digifort e SecurOS; alguns cobram licença por câmera |
+| VM | Servidor virtual: uma máquina que existe dentro de outra, provida pela infraestrutura da ARTESP |
+| Contêiner | Caixa isolada dentro da VM com um serviço e tudo de que ele precisa; o CFTV é um conjunto de contêineres |
+| Ansible | Ferramenta que repete a instalação do servidor sempre do mesmo jeito, a partir de um roteiro escrito |
+| Binário único | Um só arquivo executável que contém tudo de que precisa; é como o agente de borda é distribuído |
+| Prometheus, Loki, Grafana | Guarda de números ao longo do tempo, guarda de registros e painéis que mostram os dois |
 | Borda | Servidor da concessionária onde roda o agente com MediaMTX embutido; a central puxa dali |
 | Catálogo | Cadastro das câmeras na API; fonte de verdade de todo o sistema |
 | Revisão | Número que cresce a cada alteração de câmera; permite sincronizar só o que mudou |

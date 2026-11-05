@@ -10,7 +10,7 @@ deck de slides publicado no GitHub Pages com [reveal.js](https://revealjs.com/) 
 | `APRESENTACAO.md` | Roteiro completo, com os diagramas Mermaid que também alimentam os slides. |
 | `deck/` | Fonte dos slides: um HTML por slide em `slides/<id>.html`; `deck.json` dá a ordem. |
 | `site/` | O que o Pages serve: `template.html`, `css/artesp.css`, `img/` (logos e diagramas SVG gerados), `vendor/reveal/`. `index.html` é gerado e não versionado. |
-| `tools/` | `build-site.py` (deck → `site/index.html`), `render-diagrams.py` (roteiro → `site/img/diag-*.svg`) e `check-diagrams.py` (guarda). |
+| `tools/` | `build-site.py` (deck → `site/index.html`; `x-groups` transforma um mapa mental do roteiro em quadros), `render-diagrams.py` (roteiro → `site/img/diag-*.svg`), `check-diagrams.py` e `check-public.py` (guardas). |
 | `tests/` | `python3 -m unittest`. |
 
 ## Fluxo de trabalho
@@ -31,4 +31,6 @@ Mermaid no `APRESENTACAO.md` (a linha `<!-- diagrama: nome -->` acima dele dá o
 
 Todo push em `main` dispara o workflow `pages.yml`, que roda os testes, gera `site/index.html` e publica `site/`
 no GitHub Pages. Este repositório é público: não traga para cá especificações, planos, nomes de pessoas nem
-configuração interna.
+configuração interna. A guarda `tools/check-public.py` bloqueia endereços privados, URLs RTSP com credencial e
+atribuições de senha ou token; termos confidenciais (nomes de servidores, domínios internos) ficam fora do
+repositório, no arquivo ignorado `forbidden.local` (um por linha) e, no CI, no segredo `FORBIDDEN_EXTRA`.
