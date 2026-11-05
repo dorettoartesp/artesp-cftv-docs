@@ -30,6 +30,15 @@ class CheckTest(unittest.TestCase):
     def test_stale_file_is_reported(self):
         self.assertEqual(cd.problems(MD, self._dir(["um", "dois", "tres"])), ["sobra diag-tres.svg sem diagrama no roteiro"])
 
+    def test_two_scripts_share_the_image_set(self):
+        other = "<!-- diagrama: dois -->\n```mermaid\nflowchart LR\n```\n<!-- diagrama: tres -->\n```mermaid\nflowchart LR\n```\n"
+        self.assertEqual(cd.problems([MD, other], self._dir(["um", "dois", "tres"])), [])
+
+    def test_same_name_with_different_code_in_two_scripts_is_reported(self):
+        other = "<!-- diagrama: dois -->\n```mermaid\nflowchart TB\n```\n"
+        self.assertEqual(cd.problems([MD, other], self._dir(["um", "dois"])),
+                         ["diagrama dois difere entre os roteiros (mesmo nome, código diferente)"])
+
 
 if __name__ == "__main__":
     unittest.main()

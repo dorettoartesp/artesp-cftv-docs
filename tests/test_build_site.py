@@ -67,6 +67,22 @@ class BuildTest(unittest.TestCase):
             self.assertIn("<title>T</title>", page)
             self.assertLess(page.index('id="b"'), page.index('id="a"'))
 
+    def test_build_reads_the_script_given_as_argument(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            deck = Path(tmp) / "deck-x"
+            (deck / "slides").mkdir(parents=True)
+            site = Path(tmp) / "site"
+            site.mkdir()
+            (deck / "deck.json").write_text(json.dumps({"title": "T", "order": ["a"]}), encoding="utf-8")
+            (deck / "slides" / "a.html").write_text(
+                '<section id="a" style=""><x-groups src="r"></x-groups></section>', encoding="utf-8")
+            (site / "template.html").write_text("{{SLIDES}}", encoding="utf-8")
+            script = Path(tmp) / "OUTRO.md"
+            script.write_text("<!-- diagrama: r -->\n```mermaid\nmindmap\n  root((R))\n    Ramo\n      Folha única\n```\n",
+                              encoding="utf-8")
+            bs.build(deck, site / "x.html", script_file=script)
+            self.assertIn("Folha única", (site / "x.html").read_text(encoding="utf-8"))
+
     def test_missing_slide_file_is_an_error(self):
         with tempfile.TemporaryDirectory() as tmp:
             deck = Path(tmp) / "deck"

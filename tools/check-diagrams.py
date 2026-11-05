@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail when site/img/diag-*.svg and the script's `<!-- diagrama: -->` markers differ.
 
-Usage: python3 tools/check-diagrams.py APRESENTACAO.md site/img
+Usage: python3 tools/check-diagrams.py APRESENTACAO.md [RESUMO.md ...] site/img
 """
 import importlib.util
 import sys
@@ -13,10 +13,18 @@ rd = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(rd)
 
 
-def problems(markdown: str, img_dir: Path) -> list:
-    wanted = [name for name, _ in rd.extract(markdown)]
-    have = sorted(p.name[5:-4] for p in img_dir.glob("diag-*.svg"))
+def problems(markdown, img_dir: Path) -> list:
+    """`markdown`: one script or a list of scripts; a name used in two scripts must carry the same code."""
+    scripts = [markdown] if isinstance(markdown, str) else list(markdown)
+    code = {}
     out = []
+    for text in scripts:
+        for name, block in rd.extract(text):
+            if name in code and code[name].strip() != block.strip():
+                out.append("diagrama %s difere entre os roteiros (mesmo nome, código diferente)" % name)
+            code.setdefault(name, block)
+    wanted = list(code)
+    have = sorted(p.name[5:-4] for p in img_dir.glob("diag-*.svg"))
     for name in wanted:
         if name not in have:
             out.append("falta site/img/diag-%s.svg (rode make diagrams)" % name)
@@ -27,8 +35,10 @@ def problems(markdown: str, img_dir: Path) -> list:
 
 
 def main(argv):
-    md, img_dir = Path(argv[0]), Path(argv[1])
-    found = problems(md.read_text(encoding="utf-8"), img_dir)
+    """check-diagrams.py ROTEIRO.md [OUTRO.md ...] site/img"""
+    img_dir = Path(argv[-1])
+    texts = [Path(a).read_text(encoding="utf-8") for a in argv[:-1]]
+    found = problems(texts, img_dir)
     for line in found:
         print(line, file=sys.stderr)
     if found:

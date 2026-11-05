@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 680" width="1600" height="680" font-family="Arial, Helvetica, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6E6E6E"/></marker></defs>
+<rect x="20" y="30" width="420" height="620" rx="16" fill="#FAFAFA" stroke="#D6D6D6" stroke-dasharray="10 8"/>
+<text x="44" y="64" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#6E6E6E" text-anchor="start">Concessionária</text>
+<rect x="50" y="80" width="360" height="110" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="86" cy="135" r="24" fill="#141414"/>
+<g transform="translate(73 122) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></g>
+<text x="126" y="118" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">Câmeras</text>
+<text x="126" y="150" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">cerca de 4.600, acesso RTSP</text>
+<text x="126" y="172" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">credencial fica no servidor</text>
+<rect x="50" y="250" width="360" height="110" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="86" cy="305" r="24" fill="#141414"/>
+<g transform="translate(73 292) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></g>
+<text x="126" y="288" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">Agente de borda</text>
+<text x="126" y="320" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">quando as câmeras não são</text>
+<text x="126" y="342" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">expostas à ARTESP; uma só porta</text>
+<rect x="50" y="480" width="360" height="110" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="86" cy="535" r="24" fill="#141414"/>
+<g transform="translate(73 522) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g>
+<text x="126" y="518" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">Concessionária no portal</text>
+<text x="126" y="550" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">navegador: cadastro próprio</text>
+<text x="126" y="572" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">e resposta a chamados</text>
+<line x1="230" y1="190" x2="230" y2="250" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="590" y="30" width="460" height="620" rx="16" fill="#FFFFFF" stroke="#D6D6D6"/>
+<rect x="614" y="30" width="412" height="8" rx="4" fill="#E41C2E"/>
+<text x="618" y="76" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="bold" fill="#141414" text-anchor="start">Servidor central CFTV</text>
+<text x="618" y="102" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">contêineres numa VM; releases imutáveis</text>
+<rect x="620" y="120" width="400" height="120" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="656" cy="180" r="24" fill="#141414"/>
+<g transform="translate(643 167) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></g>
+<text x="696" y="163" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">API de catálogo</text>
+<text x="696" y="195" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">fonte de verdade: cadastro, usuários,</text>
+<text x="696" y="217" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">autorização de vídeo, auditoria</text>
+<rect x="620" y="262" width="400" height="120" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="656" cy="322" r="24" fill="#141414"/>
+<g transform="translate(643 309) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21"/></g>
+<text x="696" y="305" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">Servidor de vídeo</text>
+<text x="696" y="337" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">MediaMTX: puxa cada câmera uma vez</text>
+<text x="696" y="359" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">e redistribui a quem for autorizado</text>
+<rect x="620" y="404" width="400" height="120" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="656" cy="464" r="24" fill="#141414"/>
+<g transform="translate(643 451) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></g>
+<text x="696" y="447" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">Portal web</text>
+<text x="696" y="479" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">consulta, mapa, ao vivo em WebRTC,</text>
+<text x="696" y="501" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">chamados, aprovações</text>
+<rect x="620" y="546" width="400" height="84" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="656" cy="588" r="24" fill="#6E6E6E"/>
+<g transform="translate(643 575) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></g>
+<text x="696" y="581.5" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="bold" fill="#141414" text-anchor="start">Active Directory e relay de e-mail</text>
+<text x="696" y="611.5" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="normal" fill="#6E6E6E" text-anchor="start">login de rede; avisos e códigos por e-mail</text>
+<line x1="410" y1="150" x2="590" y2="150" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="500" y="138" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="middle">vídeo RTSP</text>
+<line x1="590" y1="322" x2="410" y2="322" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="500" y="310" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="middle">uma só porta</text>
+<line x1="410" y1="535" x2="590" y2="535" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="500" y="523" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="middle">portal</text>
+<rect x="1200" y="30" width="380" height="620" rx="16" fill="#FAFAFA" stroke="#D6D6D6" stroke-dasharray="10 8"/>
+<text x="1224" y="64" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#6E6E6E" text-anchor="start">Quem consome</text>
+<rect x="1220" y="80" width="340" height="110" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="1256" cy="135" r="24" fill="#141414"/>
+<g transform="translate(1243 122) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></g>
+<text x="1296" y="118" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">Operadores ARTESP</text>
+<text x="1296" y="150" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">cliente desktop ou navegador:</text>
+<text x="1296" y="172" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">mosaicos ao vivo</text>
+<rect x="1220" y="220" width="340" height="110" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="1256" cy="275" r="24" fill="#141414"/>
+<g transform="translate(1243 262) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></g>
+<text x="1296" y="258" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">Mapas ArcGIS</text>
+<text x="1296" y="290" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">internos e públicos:</text>
+<text x="1296" y="312" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">camadas GeoJSON e player</text>
+<rect x="1220" y="360" width="340" height="110" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="1256" cy="415" r="24" fill="#141414"/>
+<g transform="translate(1243 402) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></g>
+<text x="1296" y="398" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">Sistemas integradores</text>
+<text x="1296" y="430" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">chave aprovada: catálogo,</text>
+<text x="1296" y="452" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">feed de mudanças, vídeo</text>
+<rect x="1220" y="500" width="340" height="110" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="1256" cy="555" r="24" fill="#141414"/>
+<g transform="translate(1243 542) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></g>
+<text x="1296" y="538" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#141414" text-anchor="start">Gestores GEINFRA</text>
+<text x="1296" y="570" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">aprovações, bloqueios,</text>
+<text x="1296" y="592" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="normal" fill="#6E6E6E" text-anchor="start">auditoria</text>
+<line x1="1050" y1="150" x2="1200" y2="150" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="1125" y="138" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="middle">vídeo ao vivo</text>
+<line x1="1050" y1="290" x2="1200" y2="290" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="1125" y="278" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="middle">camadas e links</text>
+<line x1="1050" y1="430" x2="1200" y2="430" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="1125" y="418" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="middle">API e feed</text>
+<line x1="1050" y1="555" x2="1200" y2="555" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="1125" y="543" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="middle">portal</text>
+</svg>

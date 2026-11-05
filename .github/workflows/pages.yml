@@ -22,13 +22,15 @@ jobs:
       - name: Tests
         run: python3 -m unittest
       - name: Diagrams in step with the script
-        run: python3 tools/check-diagrams.py APRESENTACAO.md site/img
+        run: python3 tools/check-diagrams.py APRESENTACAO.md RESUMO.md site/img
       - name: Build
-        run: python3 tools/build-site.py deck site/index.html
+        run: |
+          python3 tools/build-site.py deck site/index.html
+          python3 tools/build-site.py deck-resumo site/resumo.html RESUMO.md
       - name: Public-text guard
         env:
           FORBIDDEN_EXTRA: ${{ secrets.FORBIDDEN_EXTRA }}
-        run: python3 tools/check-public.py APRESENTACAO.md README.md deck site/index.html
+        run: python3 tools/check-public.py APRESENTACAO.md RESUMO.md README.md deck deck-resumo site/index.html site/resumo.html site/img/*.svg
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

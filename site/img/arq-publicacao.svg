@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 620" width="1600" height="620" font-family="Arial, Helvetica, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6E6E6E"/></marker></defs>
+<rect x="20" y="10" width="500" height="600" rx="16" fill="#FFFFFF" stroke="#D6D6D6"/>
+<rect x="44" y="10" width="452" height="8" rx="4" fill="#141414"/>
+<text x="48" y="56" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="bold" fill="#141414" text-anchor="start">Mapas internos (ArcGIS corporativo)</text>
+<rect x="50" y="80" width="440" height="110" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="86" cy="135" r="24" fill="#141414"/>
+<g transform="translate(73 122) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g>
+<text x="126" y="118.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Papel de mapas</text>
+<text x="126" y="149.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">solicitado com justificativa,</text>
+<text x="126" y="170.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">aprovado por gestor</text>
+<line x1="270" y1="190" x2="270" y2="230" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="50" y="230" width="440" height="130" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="86" cy="295" r="24" fill="#141414"/>
+<g transform="translate(73 282) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></g>
+<text x="126" y="268" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Camada GeoJSON completa</text>
+<text x="126" y="299" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">todas as câmeras ativas, saúde,</text>
+<text x="126" y="320" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">link ao player; feed de mudanças</text>
+<text x="126" y="341" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">para sincronização</text>
+<line x1="270" y1="360" x2="270" y2="400" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="50" y="400" width="440" height="110" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="86" cy="455" r="24" fill="#141414"/>
+<g transform="translate(73 442) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21"/></g>
+<text x="126" y="438.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Vídeo só pelo portal</text>
+<text x="126" y="469.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">sessão e política do usuário;</text>
+<text x="126" y="490.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">a camada nunca inicia vídeo</text>
+<text x="270" y="570" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="middle">conta de rede obrigatória</text>
+<rect x="550" y="10" width="500" height="600" rx="16" fill="#FFFFFF" stroke="#D6D6D6"/>
+<rect x="574" y="10" width="452" height="8" rx="4" fill="#141414"/>
+<text x="578" y="56" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="bold" fill="#141414" text-anchor="start">Mapas públicos</text>
+<rect x="580" y="80" width="440" height="100" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="616" cy="130" r="24" fill="#141414"/>
+<g transform="translate(603 117) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></g>
+<text x="656" y="113.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Papel sensível de publicação</text>
+<text x="656" y="144.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">aprovado por gestor;</text>
+<text x="656" y="165.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">limite de chaves por pessoa</text>
+<line x1="800" y1="180" x2="800" y2="210" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="580" y="210" width="440" height="110" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="616" cy="265" r="24" fill="#141414"/>
+<g transform="translate(603 252) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1l2.1-2.1M17 7l2.1-2.1"/></g>
+<text x="656" y="248.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Chave de publicação</text>
+<text x="656" y="279.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">regras de seleção reavaliadas ao vivo:</text>
+<text x="656" y="300.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">lote, rodovia, trecho, câmera, exclusão</text>
+<line x1="800" y1="320" x2="800" y2="350" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="580" y="350" width="440" height="110" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="616" cy="405" r="24" fill="#141414"/>
+<g transform="translate(603 392) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></g>
+<text x="656" y="388.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Links prontos</text>
+<text x="656" y="419.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">GeoJSON, JSON, CSV, mapa, player, iframe;</text>
+<text x="656" y="440.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">só atributos aprovados, nunca RTSP</text>
+<line x1="800" y1="460" x2="800" y2="490" stroke="#6E6E6E" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="580" y="490" width="440" height="90" rx="12" fill="#F4F4F4" stroke="#D6D6D6"/>
+<circle cx="616" cy="535" r="24" fill="#141414"/>
+<g transform="translate(603 522) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></g>
+<text x="656" y="529" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Vídeo público</text>
+<text x="656" y="560" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">só perfil leve (SUB), por ticket curto</text>
+<rect x="1080" y="10" width="500" height="600" rx="16" fill="#FFFFFF" stroke="#D6D6D6"/>
+<rect x="1104" y="10" width="452" height="8" rx="4" fill="#E41C2E"/>
+<text x="1108" y="56" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="bold" fill="#141414" text-anchor="start">Controles</text>
+<rect x="1110" y="80" width="440" height="90" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="1146" cy="125" r="24" fill="#E41C2E"/>
+<g transform="translate(1133 112) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></g>
+<text x="1186" y="108.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Bloqueio da GEINFRA</text>
+<text x="1186" y="139.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">não publicável, por câmera ou lote;</text>
+<text x="1186" y="160.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">prevalece sobre toda chave</text>
+<rect x="1110" y="182" width="440" height="90" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="1146" cy="227" r="24" fill="#E41C2E"/>
+<g transform="translate(1133 214) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></g>
+<text x="1186" y="210.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Teto e validade</text>
+<text x="1186" y="241.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">espectadores simultâneos por chave;</text>
+<text x="1186" y="262.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">validade até um ano</text>
+<rect x="1110" y="284" width="440" height="90" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="1146" cy="329" r="24" fill="#E41C2E"/>
+<g transform="translate(1133 316) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></g>
+<text x="1186" y="312.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Rotação e revogação</text>
+<text x="1186" y="343.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">imediatas, com motivo;</text>
+<text x="1186" y="364.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">origens permitidas</text>
+<rect x="1110" y="386" width="440" height="90" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="1146" cy="431" r="24" fill="#E41C2E"/>
+<g transform="translate(1133 418) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></g>
+<text x="1186" y="414.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Consumo atribuído</text>
+<text x="1186" y="445.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">ao dono da chave,</text>
+<text x="1186" y="466.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">visível no Grafana</text>
+<rect x="1110" y="488" width="440" height="90" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+<circle cx="1146" cy="533" r="24" fill="#E41C2E"/>
+<g transform="translate(1133 520) scale(1.08333)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></g>
+<text x="1186" y="516.5" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="bold" fill="#141414" text-anchor="start">Interruptor global</text>
+<text x="1186" y="547.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">desliga todas as rotas públicas;</text>
+<text x="1186" y="568.5" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="normal" fill="#6E6E6E" text-anchor="start">hoje desligado</text>
+</svg>

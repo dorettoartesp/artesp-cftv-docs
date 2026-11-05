@@ -177,10 +177,12 @@ def convert(sid, html, script=""):
             % (trans, sid, sid, style, body.strip()))
 
 
-def build(deck_dir: Path, out: Path) -> int:
+def build(deck_dir: Path, out: Path, script_file: Path = None) -> int:
+    """deck_dir/deck.json + deck_dir/slides/*.html -> out. x-groups read `script_file` (default: APRESENTACAO.md)."""
     deck = json.loads((deck_dir / "deck.json").read_text(encoding="utf-8"))
     title = deck.get("title", "Apresentação")
-    script_file = deck_dir.resolve().parent / "APRESENTACAO.md"
+    if script_file is None:
+        script_file = deck_dir.resolve().parent / "APRESENTACAO.md"
     script = script_file.read_text(encoding="utf-8") if script_file.is_file() else ""
     slides = []
     for sid in deck["order"]:
@@ -199,7 +201,8 @@ def build(deck_dir: Path, out: Path) -> int:
 def main(argv):
     deck_dir = Path(argv[0]) if argv else Path("deck")
     out = Path(argv[1]) if len(argv) > 1 else Path("site/index.html")
-    n = build(deck_dir, out)
+    script_file = Path(argv[2]) if len(argv) > 2 else None
+    n = build(deck_dir, out, script_file)
     print("%s: %d slides, %d KB" % (out, n, out.stat().st_size // 1024))
 
 
