@@ -15,6 +15,12 @@
     "chamados",
     "avisos",
     "publicacao",
-    "controles"
+    "controles",
+    "bordas",
+    "seguranca",
+    "operacao",
+    "estado",
+    "proximos",
+    "perguntas"
   ]
 }
