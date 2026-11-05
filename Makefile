@@ -5,8 +5,9 @@ CHROME ?= google-chrome
 SITE   := site
 SHOTS  := output/shots
 
-# Text that must never go public: private addresses, RTSP URLs with credentials, keys, passwords, edge servers.
-FORBIDDEN := (\b10\.[0-9]+\.[0-9]+\.[0-9]+\b|\b192\.168\.[0-9]+\.[0-9]+\b|\b172\.(1[6-9]|2[0-9]|3[01])\.[0-9]+\.[0-9]+\b|rtsp://[^[:space:]"]*@|cftvpub_|token[=:]|senha[=:]|password[=:]|mits-autoban|\.artesp\.local)
+# Public-text guard: generic patterns live in tools/check-public.py; confidential terms come from the
+# ignored file forbidden.local (one per line) or from FORBIDDEN_EXTRA (CI secret), never from this file.
+PUBLIC_PATHS := APRESENTACAO.md README.md deck $(SITE)/index.html
 
 help: ## Lista os comandos
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-9s\033[0m %s\n", $$1, $$2}'
@@ -20,8 +21,7 @@ diagrams: ## Renderiza os diagramas do APRESENTACAO.md em site/img/diag-*.svg (r
 check: build ## Testes, build, diagramas em dia e guarda de texto público
 	@python3 -m unittest
 	@python3 tools/check-diagrams.py APRESENTACAO.md $(SITE)/img
-	@! grep -E '$(FORBIDDEN)' $(SITE)/index.html APRESENTACAO.md \
-	  || { echo "texto proibido em site/index.html ou APRESENTACAO.md"; exit 1; }
+	@python3 tools/check-public.py $(PUBLIC_PATHS)
 	@echo "ok"
 
 shots: build ## Um PNG por slide em output/shots/ para conferência (requer google-chrome)

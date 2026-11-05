@@ -4,3 +4,4 @@ __pycache__/
 .superpowers/
 .DS_Store
 *.local
+forbidden.local

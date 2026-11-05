@@ -26,9 +26,9 @@ jobs:
       - name: Build
         run: python3 tools/build-site.py deck site/index.html
       - name: Public-text guard
-        run: |
-          pattern="$(sed -n 's/^FORBIDDEN := //p' Makefile)"
-          ! grep -E "$pattern" site/index.html APRESENTACAO.md
+        env:
+          FORBIDDEN_EXTRA: ${{ secrets.FORBIDDEN_EXTRA }}
+        run: python3 tools/check-public.py APRESENTACAO.md README.md deck site/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
