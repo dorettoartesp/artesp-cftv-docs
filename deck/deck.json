@@ -1,4 +1,13 @@
 {
   "title": "CFTV ARTESP",
-  "order": []
+  "order": [
+    "capa",
+    "agenda",
+    "situacao",
+    "atores",
+    "contexto",
+    "componentes",
+    "video",
+    "desktop"
+  ]
 }
