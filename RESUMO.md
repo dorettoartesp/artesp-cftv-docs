@@ -74,7 +74,8 @@ relacionamento com as concessionárias num só lugar, sem licença por câmera, 
 4. Publicação em mapas: camada para o ArcGIS corporativo e chaves de publicação para mapas públicos, com veto da
    GEINFRA e interruptor global.
 5. Segurança: login de rede, acessos sensíveis aprovados por um segundo gestor, segredos só no servidor, toda ação
-   auditada.
+   auditada; cada chave de acesso tem limites próprios de vídeos simultâneos, banda, origem e horário, com padrões
+   definidos pela GEINFRA.
 6. Operação observável: saúde de cada câmera com histórico, métricas, logs centralizados e painéis no Grafana.
 
 ---
