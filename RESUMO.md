@@ -168,6 +168,11 @@ aprovação de um gestor diferente do solicitante.
 
 - Chave de integração: pedida com rótulo, finalidade e validade (30 a 730 dias); aprovada por um gestor que não seja o
   dono; exibida uma única vez; guardada em hash; registra o último uso; revogável.
+- Chave externa: a GEINFRA entrega a uma pessoa ou organização sem conta de rede uma credencial RTSP de alcance
+  delimitado: câmeras definidas por regras (lote, rodovia, trecho ou câmera), perfil de vídeo (somente SUB ou MAIN e
+  SUB) e validade de até 365 dias. Atribuída a um gestor responsável; qualquer gestor pode exibir, exportar com os
+  links prontos, prorrogar, renovar e revogar; toda operação é auditada. O destinatário recebe por e-mail os avisos
+  de criação, renovação, revogação e vencimento.
 - Feed de mudanças: o integrador pergunta "o que mudou desde a revisão N" e recebe só a diferença, em ordem de revisão,
   em vez de baixar o catálogo inteiro.
 
