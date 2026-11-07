@@ -668,7 +668,7 @@ nunca saem do servidor e toda ação auditada.
 - Usuários ARTESP: Active Directory via LDAPS com conta de serviço; perfil padrão de papéis no primeiro login;
   papéis adicionais solicitados com justificativa e aprovados por gestor diferente do solicitante.
 - Concessionárias: código por e-mail, com limites de tentativas e de reenvio.
-- Chaves de integração: pedidas com finalidade, aprovadas por outro gestor, exibidas uma única vez, validade limitada.
+- Chaves de integração: pedidas com finalidade, aprovadas por outro gestor, exibidas ao titular sempre que necessário e substituíveis sem nova aprovação, validade limitada.
 - Chaves de publicação: papel sensível, bloqueio da GEINFRA, rotação e revogação (seção 8).
 - Vídeo: cada leitura autorizada pela API; políticas de consumo por papel definem perfis permitidos e limites de
   leitores; refusas registradas com motivo.
@@ -909,7 +909,7 @@ Apêndice A traz as definições curtas de referência.
 
 **Código por e-mail.** A forma de entrada das concessionárias: em vez de senha, um código de seis dígitos enviado ao e-mail, válido por dez minutos. Nenhuma senha para vazar.
 
-**Chave de integração.** Um crachá de longa duração para que outro sistema (não uma pessoa) leia o catálogo e o vídeo. É pedida com justificativa, aprovada por outro gestor e exibida uma única vez.
+**Chave de integração.** Um crachá de longa duração para que outro sistema (não uma pessoa) leia o catálogo e o vídeo. É pedida com justificativa, aprovada por outro gestor, exibida ao titular sempre que necessário e substituível sem nova aprovação.
 
 **Chave de publicação.** Um crachá público que abre só a seleção de câmeras de um mapa, sempre na versão leve do vídeo. Pode ser trocada ou cancelada a qualquer momento pelo dono ou pela GEINFRA.
 
