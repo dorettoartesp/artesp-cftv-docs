@@ -51,6 +51,41 @@ class GuardTest(unittest.TestCase):
         self.assertEqual(cp.load_extra(root / "forbidden.local"), ["um-termo", "outro"])
         self.assertEqual(cp.load_extra(root / "nao-existe.local"), [])
 
+    def test_env_terms_drop_spaces_line_breaks_and_empty_entries(self):
+        self.assertEqual(cp.env_terms("alpha | beta"), ["alpha", "beta"])
+        self.assertEqual(cp.env_terms("alpha|beta\n"), ["alpha", "beta"])
+        self.assertEqual(cp.env_terms("alpha\r\nbeta|| |\n"), ["alpha", "beta"])
+        self.assertEqual(cp.env_terms(""), [])
+
+    def test_env_terms_with_spaces_still_match(self):
+        root = self._tree({"a.md": "fala de beta aqui\n"})
+        pattern = cp.pattern_with_extra("|".join(cp.escape_terms(cp.env_terms("alpha | beta\n"))))
+        self.assertEqual(len(cp.problems([root / "a.md"], pattern)), 1)
+
+    def _caught(self, text):
+        root = self._tree({"a.md": text})
+        return len(cp.problems([root / "a.md"], cp.PATTERN))
+
+    def test_quoted_keys_and_unquoted_assignments_are_caught(self):
+        for text in (
+            '"password": "x"',
+            '"token":"x"',
+            "'secret': 'x'",
+            '"api_key": "x"',
+            "password = x",
+            "senha = x",
+            "passwd: x",
+            "api_key=x",
+            "SECRET = x",
+        ):
+            with self.subTest(text=text):
+                self.assertEqual(self._caught(text + "\n"), 1)
+
+    def test_prose_mentioning_these_words_is_not_flagged(self):
+        for text in ("a senha é trocada no primeiro acesso", "o token de sessão expira", "secret manager"):
+            with self.subTest(text=text):
+                self.assertEqual(self._caught(text + "\n"), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

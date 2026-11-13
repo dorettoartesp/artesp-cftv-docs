@@ -4,7 +4,8 @@
 Usage: python3 tools/check-public.py [--extra-file forbidden.local] PATH...
 
 The built-in pattern covers private IPv4 addresses, RTSP URLs with credentials, publication-key prefixes and
-`token=`/`senha:`/`password=` assignments, case-insensitively. Terms that are themselves confidential (internal
+credential assignments (`password`, `passwd`, `senha`, `token`, `secret`, `api_key` followed by `:` or `=`,
+with or without quotes around the key and spaces before the separator), case-insensitively. Terms that are themselves confidential (internal
 host names, domain suffixes) never live in this repository: they come from an ignored file (`forbidden.local`,
 one term per line, `#` comments allowed) or from the `FORBIDDEN_EXTRA` environment variable (`|`-separated),
 which the CI reads from a repository secret.
@@ -20,9 +21,7 @@ PATTERN = re.compile(
     r"|\b172\.(1[6-9]|2[0-9]|3[01])\.[0-9]+\.[0-9]+\b"
     r"|rtsp://[^\s\"]*@"
     r"|cftvpub_"
-    r"|token[=:]"
-    r"|senha[=:]"
-    r"|password[=:])",
+    r"|(password|passwd|senha|token|secret|api_key)[\"']?\s*[:=])",
     re.IGNORECASE,
 )
 
@@ -34,6 +33,16 @@ def pattern_with_extra(extra: str):
     if not extra:
         return PATTERN
     return re.compile("%s|(%s)" % (PATTERN.pattern, extra), re.IGNORECASE)
+
+
+def env_terms(value: str) -> list:
+    """Terms from a `|`-separated value (the FORBIDDEN_EXTRA secret): spaces and line breaks are stripped from
+    each term and empty ones are dropped, so `alpha | beta` or a trailing newline cannot disable a term."""
+    return [t for t in (part.strip() for part in re.split(r"[|\r\n]", value)) if t]
+
+
+def escape_terms(terms) -> list:
+    return [re.escape(t) for t in terms]
 
 
 def load_extra(path: Path) -> list:
@@ -73,8 +82,8 @@ def main(argv):
         del args[k:k + 2]
     if not args:
         raise SystemExit(__doc__)
-    terms = load_extra(extra_file) + [t for t in os.environ.get("FORBIDDEN_EXTRA", "").split("|") if t]
-    pattern = pattern_with_extra("|".join(re.escape(t) for t in terms))
+    terms = load_extra(extra_file) + env_terms(os.environ.get("FORBIDDEN_EXTRA", ""))
+    pattern = pattern_with_extra("|".join(escape_terms(terms)))
     found = problems(args, pattern)
     for line in found:
         print(line, file=sys.stderr)
